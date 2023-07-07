@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dao.RestRepo;
+import com.example.demo.exception.NotFoundException;
 import com.example.demo.model.Customer;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,6 @@ public class RestService {
                 .stream()
                 .filter(customer -> customer.getId().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new IllegalStateException("not found customer"));
+                .orElseThrow(() -> new NotFoundException("not found customer by id: "+ id ));
     }
 }
