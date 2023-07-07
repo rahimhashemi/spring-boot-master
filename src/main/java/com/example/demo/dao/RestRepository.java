@@ -1,15 +1,10 @@
 package com.example.demo.dao;
 
 import com.example.demo.model.Customer;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-public class RestRepository implements RestRepo {
-
-    @Override
-    public List<Customer> getCustomers() {
-        return List.of(
-                new Customer(0, "RealDB", "passWord", "email@gmail.com"));
-    }
+@Repository
+public interface RestRepository extends JpaRepository<Customer, Integer> {
 }
 
