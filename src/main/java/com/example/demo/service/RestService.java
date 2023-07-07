@@ -1,21 +1,29 @@
 package com.example.demo.service;
 
-import com.example.demo.dao.RestRepository;
+import com.example.demo.dao.RestRepo;
 import com.example.demo.model.Customer;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+@Service
 public class RestService {
 
-    private final RestRepository restRepository;
+    private final RestRepo restRepository;
 
-    public RestService(RestRepository restRepository) {
+    public RestService(RestRepo restRepository) {
         this.restRepository = restRepository;
     }
 
     public List<Customer> getCustomers() {
         return restRepository.getCustomers();
+    }
+
+    public Customer getCustomer(Integer id) {
+        return getCustomers()
+                .stream()
+                .filter(customer -> customer.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("not found customer"));
     }
 }
