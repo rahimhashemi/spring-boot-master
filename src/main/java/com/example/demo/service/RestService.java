@@ -18,4 +18,12 @@ public class RestService {
     public List<Customer> getCustomers() {
         return restRepository.getCustomers();
     }
+
+    public Customer getCustomer(Integer id) {
+        return getCustomers()
+                .stream()
+                .filter(customer -> customer.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("not found customer"));
+    }
 }
