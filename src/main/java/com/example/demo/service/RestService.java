@@ -25,4 +25,8 @@ public class RestService {
                 .findById(id)
                 .orElseThrow(() -> new NotFoundException("not found customer by id: "+ id ));
     }
+
+    public void saveCustomer(Customer customer){
+        restRepository.save(customer);
+    }
 }

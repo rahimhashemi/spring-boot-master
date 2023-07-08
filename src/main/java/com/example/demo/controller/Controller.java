@@ -40,7 +40,8 @@ public class Controller {
     }
 
     @PostMapping
-    public void createNewCustomer(@Valid @RequestBody Customer customer) {
+    public void saveCustomer(@Valid @RequestBody Customer customer) {
         System.out.println("customer = " + customer);
+        restService.saveCustomer(customer);
     }
 }
