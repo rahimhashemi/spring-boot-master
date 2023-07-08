@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.exception.ApiRequestException;
 import com.example.demo.model.Customer;
 import com.example.demo.service.RestService;
 import jakarta.validation.Valid;
@@ -33,8 +34,14 @@ public class Controller {
         return restService.getCustomer(id);
     }
 
+    @GetMapping(path = "{customerId}/exception")
+    Customer getCustomerException(@PathVariable("customerId") Integer id) {
+        throw new ApiRequestException("ApiRequestException for customer by id: " + id);
+    }
+
     @PostMapping
-    public void createNewCustomer(@Valid @RequestBody Customer customer) {
+    public void saveCustomer(@Valid @RequestBody Customer customer) {
         System.out.println("customer = " + customer);
+        restService.saveCustomer(customer);
     }
 }

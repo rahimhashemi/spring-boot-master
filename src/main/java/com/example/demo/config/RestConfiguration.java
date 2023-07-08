@@ -2,7 +2,6 @@ package com.example.demo.config;
 
 import com.example.demo.dao.RestFakeRepository;
 import com.example.demo.dao.RestRepo;
-import com.example.demo.dao.RestRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +15,7 @@ public class RestConfiguration {
     @Bean
     RestRepo restRepo(){
         System.out.println("useFakeRepo = " + useFakeRepo);
-        return useFakeRepo ? new RestFakeRepository() :
-                new RestRepository();
+        return new RestFakeRepository();
+
     }
 }
