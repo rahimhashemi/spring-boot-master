@@ -4,9 +4,9 @@ variables:
   - name: jar_version
     value: 1.0.0
 
-app:
+#app:
 #  version: '@project.version@'
-  version: ${application.version}
+#  version: ${application.version}
 
 on:
   push:
