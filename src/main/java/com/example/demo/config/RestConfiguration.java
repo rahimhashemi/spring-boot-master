@@ -13,7 +13,7 @@ public class RestConfiguration {
     private Boolean useFakeRepo;
 
     @Bean
-    RestRepo restRepo(){
+    RestRepo restRepo() {
         System.out.println("useFakeRepo = " + useFakeRepo);
         return new RestFakeRepository();
 
