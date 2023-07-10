@@ -1,8 +1,8 @@
 name: Maven Package
 
+
 variables:
-  - name: version
-    value: 1.0.0
+  global_variable: 1.0.0
 
 #app:
 #  version: '@project.version@'
@@ -58,7 +58,7 @@ jobs:
           path: target/
       - name: Docker build
         run: |
-          docker build . -t  message-server:${{version}}
+          docker build . -t  message-server:$(global_variable)
 
       - name: Login to DockerHub
         uses: docker/login-action@v1
@@ -68,7 +68,7 @@ jobs:
 
       - name: Docker push
         run: |
-          docker push message-server:${{version}}
+          docker push message-server:$(global_variable)
 
   run:
     runs-on: ubuntu-latest
@@ -77,4 +77,4 @@ jobs:
     steps:
       - name: Run container
         run: |
-          docker run message-server:${{version}}
+          docker run message-server:$(global_variable)
