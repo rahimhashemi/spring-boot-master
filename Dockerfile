@@ -14,6 +14,11 @@ MAINTAINER springBoot
 COPY target/docker-message-server-1.0.0.jar message-server-1.0.0.jar
 ENTRYPOINT ["java","-jar","/message-server-1.0.0.jar"]
 
+#FROM anapsix/alpine-java
+#ADD target/my-app-*.jar /home/myjar.jar
+#CMD ["java","-jar","/home/myjar.jar"]
+
+
 #
 # Build stage
 #
