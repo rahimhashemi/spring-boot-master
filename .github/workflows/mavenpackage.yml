@@ -60,11 +60,11 @@ jobs:
 
       - name: Docker build
         run: |
-          docker build . -t  message-server:$version
+          docker build . --tag=message-server:$version
 
       - name: Docker push
         run: |
-          docker push simpath/message-server:$version
+          docker push message-server:$version
 
   run:
     runs-on: ubuntu-latest
