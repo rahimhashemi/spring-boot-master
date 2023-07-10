@@ -1,7 +1,7 @@
 name: Maven Package
 
 variables:
-  - name: jar_version
+  - name: version
     value: 1.0.0
 
 #app:
@@ -58,7 +58,7 @@ jobs:
           path: target/
       - name: Docker build
         run: |
-          docker build . -t  message-server:${{jar_version}}
+          docker build . -t  message-server:${{version}}
 
       - name: Login to DockerHub
         uses: docker/login-action@v1
@@ -68,7 +68,7 @@ jobs:
 
       - name: Docker push
         run: |
-          docker push message-server:${{jar_version}}
+          docker push message-server:${{version}}
 
   run:
     runs-on: ubuntu-latest
@@ -77,4 +77,4 @@ jobs:
     steps:
       - name: Run container
         run: |
-          docker run message-server:${{jar_version}}
+          docker run message-server:${{version}}
