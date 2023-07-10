@@ -1,4 +1,4 @@
-name: Java CI/CD
+name: CI/CD
 
 on:
   push:
@@ -33,5 +33,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build the Docker image
-        run: docker build -f --file Dockerfile --tag message-server:$(date +%s) .
+        run: |
+          docker build . -t  message-server:$(date +%s) -f Dockerfile
+#        run: docker build -f --file Dockerfile --tag message-server:$(date +%s) .
 #      run: docker build --tag=message-server:latest .
