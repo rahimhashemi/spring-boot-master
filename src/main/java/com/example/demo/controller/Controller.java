@@ -4,19 +4,17 @@ import com.example.demo.exception.ApiRequestException;
 import com.example.demo.model.Customer;
 import com.example.demo.service.RestService;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RequestMapping(path = "api/v1/customer")
 @RestController
+@AllArgsConstructor
 public class Controller {
 
     private final RestService restService;
-
-    public Controller(RestService restService) {
-        this.restService = restService;
-    }
 
     @GetMapping()
     public String hello() {

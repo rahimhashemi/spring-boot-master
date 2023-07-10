@@ -9,7 +9,7 @@ import java.time.ZonedDateTime;
 
 @ControllerAdvice
 public class ApiExceptionHandler {
-    @ExceptionHandler
+    @ExceptionHandler(value = ApiRequestException.class)
     public ResponseEntity<Object> handleApiRequestException(ApiRequestException e) {
         ApiException apiException = new ApiException(
                 e.getMessage(),
@@ -20,7 +20,7 @@ public class ApiExceptionHandler {
         return new ResponseEntity<>(apiException, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler
+    @ExceptionHandler(value = NotFoundException.class)
     public ResponseEntity<Object> handleApiRequestException(NotFoundException e) {
         ApiException apiException = new ApiException(
                 e.getMessage(),
