@@ -64,7 +64,7 @@ jobs:
 
       - name: Docker push
         run: |
-          docker push message-server:$version
+          docker push ${{ secrets.DOCKER_USERNAME }}/message-server:$version
 
   run:
     runs-on: ubuntu-latest
