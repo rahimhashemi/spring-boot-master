@@ -60,7 +60,7 @@ jobs:
 
       - name: Docker build
         run: |
-          docker build . --tag=message-server:$version
+          docker build . --tag=${{ secrets.DOCKER_USERNAME }}/message-server:$version
 
       - name: Docker push
         run: |
