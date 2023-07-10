@@ -9,7 +9,7 @@ import jakarta.validation.constraints.NotBlank;
 @Table
 public class Customer {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+//    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
     @NotBlank
     private String name;
