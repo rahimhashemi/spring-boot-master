@@ -8,10 +8,11 @@
 #EXPOSE 8080
 #ARG JAR_FILE=target/spring-boot-docker-1.jar
 
-#FROM openjdk:17-jdk-alpine
+
 FROM khipu/openjdk17-alpine:latest
 MAINTAINER springBoot
-COPY target/docker-message-server-${project.version}.jar message-server-${project.version}.jar
+ARG JAR_VERSION
+COPY target/docker-message-server-${JAR_VERSION}.jar message-server-${JAR_VERSION}.jar
 ENTRYPOINT ["java","-jar","/message-server-1.0.0.jar"]
 
 #FROM anapsix/alpine-java
