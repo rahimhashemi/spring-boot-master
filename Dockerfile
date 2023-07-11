@@ -11,8 +11,8 @@
 
 FROM khipu/openjdk17-alpine:latest
 MAINTAINER springBoot
-ARG JAR_VERSION
-COPY target/docker-message-server-${JAR_VERSION}.jar message-server-${JAR_VERSION}.jar
+#ARG JAR_VERSION
+COPY target/docker-message-server-1.2.0.jar message-server-1.2.0.jar
 ENTRYPOINT ["java","-jar","/message-server-1.0.0.jar"]
 
 #FROM anapsix/alpine-java
