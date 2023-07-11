@@ -11,7 +11,7 @@
 #FROM openjdk:17-jdk-alpine
 FROM khipu/openjdk17-alpine:latest
 MAINTAINER springBoot
-COPY target/${project.artifactId}-${project.version}.jar message-server-${project.version}.jar
+COPY target/docker-message-server-${project.version}.jar message-server-${project.version}.jar
 ENTRYPOINT ["java","-jar","/message-server-1.0.0.jar"]
 
 #FROM anapsix/alpine-java
