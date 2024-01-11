@@ -5,23 +5,20 @@ import com.example.demo.model.Customer;
 import com.example.demo.service.RestService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping(path = "api/v1/customer")
+@RequestMapping(path = "api/v1/customers")
 @RestController
 @AllArgsConstructor
-public class Controller {
+@Slf4j
+public class CustomerController {
 
     private final RestService restService;
 
-    @GetMapping()
-    public String hello() {
-        return "service is up and running";
-    }
-
-    @GetMapping("/all")
+    @GetMapping("/")
     @ResponseBody
     public List<Customer> getCustomers() {
         return restService.getCustomers();
@@ -39,8 +36,7 @@ public class Controller {
 
     @PostMapping
     public void saveCustomer(@Valid @RequestBody Customer customer) {
-        System.out.println("customer = " + customer);
         Customer savedCustomer = restService.saveCustomer(customer);
-        System.out.println("savedCustomer = " + savedCustomer);
+        log.info("savedCustomer = " + savedCustomer);
     }
 }
