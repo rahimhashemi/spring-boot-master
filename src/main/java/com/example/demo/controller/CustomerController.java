@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.exception.ApiRequestException;
 import com.example.demo.model.Customer;
+import com.example.demo.dto.CustomerDto;
 import com.example.demo.service.RestService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -20,12 +21,12 @@ public class CustomerController {
 
     @GetMapping("/")
     @ResponseBody
-    public List<Customer> getCustomers() {
+    public List<CustomerDto> getCustomers() {
         return restService.getCustomers();
     }
 
     @GetMapping(path = "{customerId}")
-    Customer getCustomer(@PathVariable("customerId") Integer id) {
+    CustomerDto getCustomer(@PathVariable("customerId") Integer id) {
         return restService.getCustomer(id);
     }
 

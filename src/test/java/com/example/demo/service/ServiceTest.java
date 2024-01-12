@@ -1,7 +1,9 @@
 package com.example.demo.service;
 
-import com.example.demo.dao.RestRepository;
+import com.example.demo.repository.RestRepository;
 import com.example.demo.model.Customer;
+import com.example.demo.dto.CustomerDto;
+import com.example.demo.dto.CustomerMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,6 +24,8 @@ class ServiceTest {
 
     @Mock
     private RestRepository restRepository;
+    @Mock
+    private CustomerMapper customerMapper;
 
     private RestService underTest;
 
@@ -29,7 +33,7 @@ class ServiceTest {
 
     @BeforeEach
     void setUp() {
-        underTest = new RestService(restRepository);
+        underTest = new RestService(restRepository, customerMapper);
         customer = new Customer(1,
                 "rahim",
                 "hello",
@@ -41,7 +45,7 @@ class ServiceTest {
     }
 
     @Test
-    void getCustomers() {
+    void itShouldGetCustomers() {
         // when
         underTest.getCustomers();
         // then
@@ -49,21 +53,21 @@ class ServiceTest {
     }
 
     @Test
-    public void testGetCustomer() {
+    void itShouldGetCustomer_ByMocking() {
         // Mock the repository's findById method to return the customer object
         when(restRepository.findById(1)).thenReturn(Optional.of(customer));
 
-        Customer retrievedCustomer = underTest.getCustomer(1);
+        CustomerDto retrievedCustomer = underTest.getCustomer(1);
 
         // Verify that the repository's findById method was called with the correct ID
         verify(restRepository).findById(1);
 
         // Verify that the returned customer object is the same as the one we created
-        assertEquals(customer, retrievedCustomer);
+        assertEquals(customerMapper.entityToDto(customer), retrievedCustomer);
     }
 
     @Test
-    public void testSaveCustomer() {
+    void itShouldSaveCustomer_ByMocking() {
 
         // Mock the repository's save method to return the customer object
         when(restRepository.save(customer)).thenReturn(customer);
@@ -78,7 +82,7 @@ class ServiceTest {
     }
 
     @Test
-    void saveCustomer() {
+    void itShouldSaveCustomer() {
         // given
         Customer rahim = new Customer(1,
                 "rahim",
