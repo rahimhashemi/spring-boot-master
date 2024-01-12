@@ -1,6 +1,6 @@
 package com.example.demo.integration;
 
-import com.example.demo.dao.RestRepository;
+import com.example.demo.repository.RestRepository;
 import com.example.demo.model.Customer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         locations = "classpath:application-it.properties"
 )
 @AutoConfigureMockMvc
-public class RestIT {
+class RestIT {
 
     @Autowired
     private MockMvc mockMvc;
@@ -37,11 +37,6 @@ public class RestIT {
     private RestRepository restRepository;
 
     private final Faker faker = new Faker();
-
-    @Test
-    void name() {
-        System.out.println("mockMvc = " + mockMvc);
-    }
 
     @Test
     void canRegisterNewStudent() throws Exception {

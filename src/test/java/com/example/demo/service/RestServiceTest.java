@@ -1,7 +1,10 @@
 package com.example.demo.service;
 
-import com.example.demo.dao.RestRepository;
+import com.example.demo.dto.CustomerDto;
+import com.example.demo.dto.CustomerMapper;
+import com.example.demo.dto.CustomerMapperImpl;
 import com.example.demo.model.Customer;
+import com.example.demo.repository.RestRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -19,6 +22,7 @@ class RestServiceTest {
 
     @Autowired
     private RestRepository restRepository;
+    private final CustomerMapper customerMapper = new CustomerMapperImpl();
 
     private RestService underTest;
 
@@ -27,7 +31,7 @@ class RestServiceTest {
     @BeforeEach
     void setUp() {
         restRepository.deleteAll();
-        underTest = new RestService(restRepository);
+        underTest = new RestService(restRepository, customerMapper);
         rahim = new Customer(1,
                 "rahim",
                 "hello",
@@ -48,17 +52,14 @@ class RestServiceTest {
                 "hi",
                 "behsazan@gmail.com");
 
-//        restRepository.saveAll(Arrays.asList(rahim, ali));
         restRepository.save(rahim);
         restRepository.save(ali);
 
         //when
-        List<Customer> customers = underTest.getCustomers();
-        System.out.println("customers.toString() = " + customers.toString());
+        List<CustomerDto> customers = underTest.getCustomers();
 
         // then - verify the output
-        assertThat(customers).isNotNull();
-        assertThat(customers.size()).isEqualTo(2);
+        assertThat(customers).isNotNull().hasSize(2);
     }
 
     @Test
@@ -68,8 +69,7 @@ class RestServiceTest {
         restRepository.save(rahim);
 
         //when
-        Customer customer = underTest.getCustomer(1);
-        System.out.println("customers.toString() = " + customer.toString());
+        CustomerDto customer = underTest.getCustomer(rahim.getId());
 
         //then
         assertThat(customer).isNotNull();
